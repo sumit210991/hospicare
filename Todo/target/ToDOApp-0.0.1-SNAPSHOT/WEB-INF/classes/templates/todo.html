@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="default">
+    <head>
+        <title>Home</title>
+    </head>
+    <body>
+        <div layout:fragment="content" class="row">
+            <div class="col-xs-8 col-md-8">
+                <h3>
+                    <a th:href="@{'/todo/create'}" class="btn btn-primary"><i class="fas fa-plus-square"></i> TODO</a>
+                </h3>
+                <h2>My Todo List</h2>
+                <div class="table-responsive">
+                    <table class="table" id="todo-table">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Content</th>
+                                <th>Updated</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="todo : ${todo}">
+                                <td><a th:text="${todo.title}" th:href="@{'/todo/show/' + ${todo.id}}"></a></td>
+                                <td th:text="${todo.content}"></td>
+                                <td th:text="${new java.text.SimpleDateFormat('dd MMM yyyy').format(todo.updated)}"></td>
+                                <td th:text="${todo.status}"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="default">
+    <head>
+        <title>Show Todo</title>
+    </head>
+    <body>
+        <div layout:fragment="content" class="row">
+            <div class="col-xs-8 col-md-8">
+                <h3>
+                    <a th:href="@{'/todo'}" class="btn btn-primary"><i class="fas fa-list"></i> Todo</a>
+                </h3>
+                <h2 th:text="${todo.title}"></h2>
+                <dl class="list">
+                    <dt>Content</dt>
+                    <dd th:text="${todo.content}"></dd>
+                    <dt>Updated</dt>
+                    <dd th:text="${new java.text.SimpleDateFormat('dd MMM yyyy').format(todo.updated)}"></dd>
+                    <dt>Status</dt>
+                    <dd th:text="${todo.status}"></dd>
+                </dl>
+                <form th:action="@{/todo/delete}">
+                    <input type="hidden" name="id" th:value="${todo.id}" />
+                    <h2><input type="submit" class="btn btn-danger" value="Delete" onclick="return confirm('Are you sure?');" />
+                        <a th:href="@{'/todo/edit/' + ${todo.id}}" class="btn btn-warning"><i class="fas fa-edit"></i> Edit</a></h2>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
